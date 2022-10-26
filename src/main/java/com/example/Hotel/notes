@@ -1,0 +1,93 @@
+insert into tb_states (id, state_name) VALUES (1, 'Maranhão');
+insert into tb_states (id, state_name) VALUES (2, 'Ceará');
+
+insert into tb_city (name_city,state_id) values ('São Luís', 1);
+insert into tb_city (name_city,state_id) values ('Viana', 1);
+insert into tb_city (name_city,state_id) values ('Bacabeira', 1);
+insert into tb_city (name_city,state_id) values ('Cajari', 1);
+insert into tb_city (name_city,state_id) values ('Imperatriz', 1);
+insert into tb_city (name_city,state_id) values ('São José de Ribamar', 1);
+insert into tb_city (name_city,state_id) values ('Timon', 1);
+insert into tb_city (name_city,state_id) values ('Caxias', 1);
+
+insert into tb_city (name_city, state_id) values ('fortaleza',2);
+
+
+insert into tb_hotels (id, address, employee_identification_number, hotel_description, price_five_persons, price_four_persons, price_only_person, price_three_persons, price_two_persons, name, phone, city_id, star, number_rooms, categoria) VALUES
+    (1, 'Hotel Street Test number one ','63.634.901/0001-22', 'Tv, Wifi, Breakfast', 500, 420,120,350,200,'Pousada 1 ','(98)984508897',1,4,18,1);
+
+insert into tb_hotels (id, address, employee_identification_number, hotel_description, price_five_persons, price_four_persons, price_only_person, price_three_persons, price_two_persons, name, phone, city_id, star, number_rooms, categoria) VALUES
+    (2, 'Hotel Street Test number two ','63.634.901/0001-22', 'Tv, Wifi, Breakfast', 300, 250,80,180,120,'Pousada 2 ','(98)984508897',2,4,20,1);
+
+insert into tb_hotels (id, address, employee_identification_number, hotel_description, price_five_persons, price_four_persons, price_only_person, price_three_persons, price_two_persons, name, phone, city_id,star, number_rooms, categoria) VALUES
+    (3, 'Hotel Street Test number three ','63.634.901/0001-22', 'Tv, Wifi, Breakfast', 320, 260,90,200,160,'Pousada 3 ','(98)984508897',3,4,22,1);
+
+insert into tb_hotels (id, address, employee_identification_number, hotel_description, price_five_persons, price_four_persons, price_only_person, price_three_persons, price_two_persons, name, phone, city_id, star, number_rooms, categoria) VALUES
+    (4, 'Hotel Street Test number one ','63.634.901/0001-22', 'Tv, Wifi, Breakfast', 500, 420,120,350,200,'Isto É Pousada ','(98)984508897',2,5,15,1);
+
+insert into tb_hotels (id, address, employee_identification_number, hotel_description, price_five_persons, price_four_persons, price_only_person, price_three_persons, price_two_persons, name, phone, city_id, star, number_rooms, categoria) VALUES
+    (5, 'Hotel Street Test number two ','63.634.901/0001-22', 'Tv, Wifi, Breakfast', 300, 250,80,180,120,'Pousada Caribe','(98)984508897',2,4,15,1);
+
+insert into tb_hotels (id, address, employee_identification_number, hotel_description, price_five_persons, price_four_persons, price_only_person, price_three_persons, price_two_persons, name, phone, city_id, star, number_rooms, categoria) VALUES
+    (6, 'Hotel Street Test number three ','63.634.901/0001-22', 'Tv, Wifi, Breakfast', 320, 260,90,200,160,'Pousada Águas Verdes ','(98)984508897',2,3,16,1);
+
+insert into tb_hotels (id, address, employee_identification_number, hotel_description, price_five_persons, price_four_persons, price_only_person, price_three_persons, price_two_persons, name, phone, city_id, star, number_rooms, categoria) VALUES
+    (7, 'Hotel Street Test number three ','63.634.901/0001-22', 'Tv, Wifi, Breakfast', 320, 260,90,200,160,'Pousada Dennis tomou Bença pra walt dysnei hoje vish kkk ','(98)984508897',1,4,7,1);
+
+insert into tb_hotels (id, address, employee_identification_number, hotel_description, price_five_persons, price_four_persons, price_only_person, price_three_persons, price_two_persons, name, phone, city_id, star, number_rooms, categoria) VALUES
+    (8, 'Hotel Street Test number three ','63.634.901/0001-22', 'Tv, Wifi, Breakfast', 320, 260,90,200,160,'Pousada Pereba ','(98)984508897',2,4,18,1);
+
+insert into tb_hotels (id, address, employee_identification_number, hotel_description, price_five_persons, price_four_persons, price_only_person, price_three_persons, price_two_persons, name, phone, city_id, star, number_rooms, categoria) VALUES
+    (9, 'Hotel Street Test number three ','63.634.901/0001-22', 'Tv, Wifi, Breakfast', 320, 260,90,200,160,'@RequestMapping incorrectly','(98)984508897',3,5,19,1);
+
+insert into tb_hotels (id, address, employee_identification_number, hotel_description, price_five_persons, price_four_persons, price_only_person, price_three_persons, price_two_persons, name, phone, city_id, star, number_rooms, categoria) VALUES
+    (10, 'Hotel Street Test number three ','63.634.901/0001-22', 'Tv, Wifi, Breakfast', 320, 260,90,200,160,'@RequestMapping incorrectly','(98)984508897',9,5,19,1);
+
+
+
+
+
+
+
+insert into tb_books (book_id, amount_adult, amount_childs, data_entry, data_out, id_client, id_hotel) VALUES
+    (1,2,1,'05/01/22','05/08/22',1,1);
+insert into tb_books (book_id, amount_adult, amount_childs, data_entry, data_out, id_client, id_hotel) VALUES
+    (2,3,2,'05/01/22','05/08/22',1,2);
+insert into tb_books (book_id, amount_adult, amount_childs, data_entry, data_out, id_client, id_hotel) VALUES
+    (3,4,0,'05/01/22','05/08/22',1,3);
+insert into tb_books (book_id, amount_adult, amount_childs, data_entry, data_out, id_client, id_hotel) VALUES
+    (4,2,2,'05/01/22','05/08/22',1,4);
+insert into tb_books (book_id, amount_adult, amount_childs, data_entry, data_out, id_client, id_hotel) VALUES
+    (5,2,3,'05/01/22','05/08/22',1,5);
+
+
+insert into tb_passeios (id, descricao_passeio, estrela, nome_passeio, preço_por_pessoa, cidade_id, categoria_id) VALUES (1, 'passeio muito bacana', 5, 'Passeio em barreirinhas',100,1,2);
+
+insert into tb_client (id, client_adress, client_cpf, client_birth, client_email, client_email_confirm, client_complete_name, client_password, client_password_confirm, client_phone, client_phone_confirm, client_user_name) VALUES
+    (1, 'Street test number eleven','080.362.532-08','04/10/1999', 'sam11@gmail.com', 'sam11@gmail.com', 'Sam Helson Nunes Diniz', '123456789','123456789', '(98)98452-8497','(98)98452-8497','saaaam');
+
+insert into tb_client (id, client_adress, client_cpf, client_birth, client_email, client_email_confirm, client_complete_name, client_password, client_password_confirm, client_phone, client_phone_confirm, client_user_name) VALUES
+    (2, 'Street test number eleven','080.362.532-08','04/10/1999', 'sam11@gmail.com', 'sam11@gmail.com', 'Sam Helson Nunes Diniz', '123456789','123456789', '(98)98452-8497','(98)98452-8497','saaaam');
+
+insert into tb_guia (id, descricao_guia, nome_do_guia, qualidade_do_guia, guia_passeio) VALUES (1,'guia gente boa','jaozinho',5,1);
+
+insert into tb_reservar_passeios (id, amount_adult, amount_childs, data_marcada, horario, id_client, guia_turistico,
+                                  id_passeio)
+values (1,2,2,'10/25/2022','10:00',1,1,1);
+
+insert into tb_categoria (id, categoria) VALUES (1,'Hotel');
+insert into tb_categoria (id, categoria) VALUES (2,'Passeio');
+insert into tb_categoria (id, categoria) VALUES (3,'Gastronomia');
+
+select *
+from tb_hotels as t
+         join tb_city as c on t.city_id = c.id
+         join tb_states as u on = u.ma08iduf
+where t.FK0506idtripcategory = 1 and
+        u.ma08iduf = 10;
+
+select * from tb_hotels as t join tb_city as c on t.city_id = c.id join tb_states as u on c.state_id = u.id where t.categoria = 1 and u.id = 2;
+select * from tb_passeios as t join tb_city as c on t.cidade_id = c.id join tb_states as u on c.state_id = u.id where t.categoria_id = 2 and u.id = 1;
+
+select * from tb_hotels as t join tb_city as c on t.city_id = c.id join tb_states as u on c.state_id = u.id where t.categoria = 1;
+
