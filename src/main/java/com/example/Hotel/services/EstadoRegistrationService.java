@@ -15,11 +15,11 @@ public class EstadoRegistrationService {
     private EstadoRepository stateRepository;
 
     public Estado add(Estado state) {
-        return stateRepository.add(state);
+        return stateRepository.save(state);
     }
     public void exclude(Long stateId) {
        try {
-           stateRepository.remove(stateId);
+           stateRepository.deleteById(stateId);
        } catch (EmptyResultDataAccessException e){
            throw new EntityNotFound("State code % not found" + stateId);
        } catch (DataIntegrityViolationException e) {

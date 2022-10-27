@@ -13,6 +13,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/states")
@@ -24,14 +25,14 @@ public class EstadoController {
 
     @GetMapping
     public List<Estado> list() {
-        return stateRepository.all();
+        return stateRepository.findAll();
     }
 
     @GetMapping("/{stateId}")
     public ResponseEntity<Estado> find(@PathVariable("stateId") Long id) {
-        Estado state = stateRepository.perId(id);
+        Optional<Estado> state = stateRepository.findById(id);
         if (state != null) {
-            return ResponseEntity.ok(state);
+            return ResponseEntity.ok(state.get());
         } else {
 //        return ResponseEntity.status(HttpStatus.FOUND).build();
             return ResponseEntity.notFound().build();
@@ -43,18 +44,18 @@ public class EstadoController {
         return stateRegistrationService.add(state);
     }
 
-    @PutMapping("/{stateId}")
-    public ResponseEntity<Estado> update(@PathVariable Long stateId, @RequestBody Estado state) {
-        Estado state1 = stateRepository.perId(stateId);
-        if (state1 != null) {
-            BeanUtils.copyProperties(state, state1, "id");
-            state1 = stateRegistrationService.add(state1);
-            return ResponseEntity.ok(state1);
-        }
-        return ResponseEntity.notFound().build();
-    }
+//    @PutMapping("/{stateId}")
+//    public ResponseEntity<Estado> update(@PathVariable Long stateId, @RequestBody Estado state) {
+//       Optional<Estado> state1 = stateRepository.findById(stateId);
+//        if (state1 != null) {
+//            BeanUtils.copyProperties(state, state1, "id");
+//            state1 = stateRegistrationService.(state1.);
+//            return ResponseEntity.ok(state1.get());
+//        }
+//        return ResponseEntity.notFound().build();
+//    }
     @DeleteMapping("/{stateId}")
-    public ResponseEntity<Cidade> remove(@PathVariable Long stateId) {
+    public ResponseEntity<Estado> remove(@PathVariable Long stateId) {
         try {
             stateRegistrationService.exclude(stateId);
             return ResponseEntity.noContent().build();
