@@ -1,2 +1,4 @@
-package com.example.Hotel;public class a {
+package com.example.Hotel;
+
+public class a {
 }
