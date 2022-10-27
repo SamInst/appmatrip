@@ -18,7 +18,7 @@ import java.time.Period;
 import java.util.List;
 
 @RestController
-@RequestMapping("/books")
+@RequestMapping("/booksHotel")
 public class ReservarHotelController {
     @Autowired
     private ReservasHotelRepository booksRepository;

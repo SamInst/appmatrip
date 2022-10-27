@@ -14,7 +14,7 @@ public class BooksRepositoryImplementation implements ReservasHotelRepository {
     private EntityManager manager;
     @Override
     public List<ReservarHotel> all(){
-        return manager.createQuery("from Books", ReservarHotel.class).getResultList();
+        return manager.createQuery("from ReservarHotel", ReservarHotel.class).getResultList();
     }
     @Override
     public ReservarHotel perId(Long id){ return manager.find(ReservarHotel.class, id);
