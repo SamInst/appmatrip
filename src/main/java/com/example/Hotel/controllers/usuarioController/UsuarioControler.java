@@ -13,24 +13,23 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/clients")
 public class UsuarioControler {
     @Autowired
     private ClienteRepository clientRepository;
-
     @Autowired
     private UsuarioRegistrationService clientRegistrationService;
-
     @GetMapping
     public List<Cliente> list() {
-        return clientRepository.all();
+        return clientRepository.findAll();
     }
 
     @GetMapping("/{clientId}")
     public ResponseEntity<ClienteResponse> find(@PathVariable("clientId") Long id) {
-        Cliente client = clientRepository.perId(id);
+       final var client = clientRepository.findById(id).orElseThrow(() -> new EntityNotFound("Cliente não encontrado"));
     if (client != null) {
         final var response = new ClienteResponse(
             client.getUsername(),
@@ -50,17 +49,11 @@ public class UsuarioControler {
         return clientRegistrationService.add(client);
     }
     @PutMapping("/{clientId}")
-    public ResponseEntity<Cliente> update(@PathVariable Long clientId, @RequestBody Cliente client) {
-        Cliente client1 = clientRepository.perId(clientId);
-
-        if (client1 != null) {
-            BeanUtils.copyProperties(client1, client, "id"); // for a lot of data in kitchen
-
-            client1 = clientRegistrationService.add(client1);
-            return ResponseEntity.ok(client1);
+    public Cliente update(@PathVariable Long clientId, @RequestBody Cliente client) {
+        Cliente client1 = clientRepository.findById(clientId).get();
+            BeanUtils.copyProperties(client1, client, "id");
+            return clientRepository.save(client1);
         }
-        return ResponseEntity.notFound().build();
-    }
     @DeleteMapping("/{clientId}")
     public ResponseEntity<Cliente> remove(@PathVariable Long clientId) {
         try {

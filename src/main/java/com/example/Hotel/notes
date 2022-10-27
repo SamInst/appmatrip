@@ -9,7 +9,6 @@ insert into tb_city (name_city,state_id) values ('Imperatriz', 1);
 insert into tb_city (name_city,state_id) values ('São José de Ribamar', 1);
 insert into tb_city (name_city,state_id) values ('Timon', 1);
 insert into tb_city (name_city,state_id) values ('Caxias', 1);
-
 insert into tb_city (name_city, state_id) values ('fortaleza',2);
 
 
@@ -76,7 +75,7 @@ insert into tb_reservar_passeios (id, amount_adult, amount_childs, data_marcada,
 values (1,2,2,'10/25/2022','10:00',1,1,1);
 
 insert into tb_categoria (id, categoria) VALUES (1,'Hotel');
-insert into tb_categoria (id, categoria) VALUES (2,'Passeio');
+insert into tb_categoria (id, categoria) VALUES (2,'Passeio'), (3,'Gastronomia');
 insert into tb_categoria (id, categoria) VALUES (3,'Gastronomia');
 
 select *

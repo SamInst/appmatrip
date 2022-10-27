@@ -15,11 +15,11 @@ public class UsuarioRegistrationService {
     private ClienteRepository clientRepository;
 
     public Cliente add(Cliente client) {
-        return clientRepository.add(client);
+        return clientRepository.save(client);
     }
     public void exclude(Long clientId) {
        try {
-           clientRepository.remove(clientId);
+           clientRepository.deleteById(clientId);
        } catch (EmptyResultDataAccessException e){
            throw new EntityNotFound("Client code % not found" + clientId);
        } catch (DataIntegrityViolationException e) {
