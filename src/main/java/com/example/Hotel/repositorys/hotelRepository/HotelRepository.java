@@ -40,4 +40,9 @@ public interface HotelRepository extends JpaRepository<Hotels, Long> {
 
 //    @Query(value = "select a from tb_hotels as t join tb_city as c on t.city_id = c.id / join tb_states as u on c.state_id = u.id where t.categoria = 1 and u.id = 1")
     List<Hotels> queryHotelsByCity_State_IdAndCategoria_Id (Long state_id, Long categoria_id);
+
+    List<Hotels> queryHotelsByCity_IdAndCity_State_Id (Long city_id, Long state_id);
+    //------------------------------------------------------------------------------------------------------------------
+    @Query(value = "select u from Hotels u where u.Destaque = 1 ")
+    List<Hotels> queryHotelsByDestaque (Integer destaque);
 }

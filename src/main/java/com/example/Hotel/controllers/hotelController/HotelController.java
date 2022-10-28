@@ -99,6 +99,12 @@ public class HotelController {
         return getListResponseEntityPriceForOne(hotels);
     }
 
+    @GetMapping("/findHotelsByDestaques") //-------------------------------------------------------------------------------
+    public ResponseEntity<List<HotelsListInCityResponse>> findHotelsByDestaques(Integer destaque) {
+        final var hotels = hotelRepository.queryHotelsByDestaque(destaque);
+        return getListResponseEntityPriceForOne(hotels);
+    }
+
     @GetMapping("/find/hotelsByName") //------------------------------------------------------------------------------
     @ResponseBody
     public ResponseEntity<List<HotelsListInCityResponse>> hotelsByName(@RequestParam(name = "name") String name) {
@@ -173,9 +179,6 @@ public class HotelController {
         return getListResponseEntityPriceFive(hotels);
     }
 
-
-
-
     @GetMapping("/findByPriceBetweenAndCityName") //--------------------------------------------------------------------
     public ResponseEntity<List<HotelsListInCityResponse>> findByPriceBetweenAndCityName(Float price1, Float price2, String name) {
         final var hotels = hotelRepository.queryByHotelPrices_PriceOneBetweenAndCity_Name(price1, price2, name.trim().toUpperCase());
@@ -201,6 +204,39 @@ public class HotelController {
         final var hotels = hotelRepository.queryByHotelPrices_PriceFiveBetweenAndCity_Name(price1, price2, name.trim().toUpperCase());
         return getListResponseEntityPriceFive(hotels);
     }
+
+    @GetMapping("/findHotelPriceOneByCityAndStateId") //--------------------------------------------------------------------
+    public ResponseEntity<List<HotelsListInCityResponse>> findHotelPriceOneByCityAndStateId(Long city_id, Long state_id) {
+        final var hotels = hotelRepository.queryHotelsByCity_IdAndCity_State_Id(city_id,state_id);
+        return getListResponseEntityPriceForOne(hotels);
+    }
+    @GetMapping("/findHotelPriceTwoByCityAndStateId") //--------------------------------------------------------------------
+    public ResponseEntity<List<HotelsListInCityResponse>> findHotelPriceTwoByCityAndStateId(Long city_id, Long state_id) {
+        final var hotels = hotelRepository.queryHotelsByCity_IdAndCity_State_Id(city_id,state_id);
+        return getListResponseEntityPriceTwo(hotels);
+    }
+    @GetMapping("/findHotelPriceThreeByCityAndStateId") //--------------------------------------------------------------------
+    public ResponseEntity<List<HotelsListInCityResponse>> findHotelPriceThreeByCityAndStateId(Long city_id, Long state_id) {
+        final var hotels = hotelRepository.queryHotelsByCity_IdAndCity_State_Id(city_id,state_id);
+        return getListResponseEntityPriceThree(hotels);
+    }
+    @GetMapping("/findHotelPriceFourByCityAndStateId") //--------------------------------------------------------------------
+    public ResponseEntity<List<HotelsListInCityResponse>> findHotelPriceFourByCityAndStateId(Long city_id, Long state_id) {
+        final var hotels = hotelRepository.queryHotelsByCity_IdAndCity_State_Id(city_id,state_id);
+        return getListResponseEntityPriceFour(hotels);
+    }
+    @GetMapping("/findHotelPriceFiveByCityAndStateId") //--------------------------------------------------------------------
+    public ResponseEntity<List<HotelsListInCityResponse>> findHotelPriceFiveByCityAndStateId(Long city_id, Long state_id) {
+        final var hotels = hotelRepository.queryHotelsByCity_IdAndCity_State_Id(city_id,state_id);
+        return getListResponseEntityPriceFive(hotels);
+    }
+
+
+//    @GetMapping("/findHotelPriceOneByCityAndStateIdAndPrice") //--------------------------------------------------------------------
+//    public ResponseEntity<List<HotelsListInCityResponse>> findHotelPriceOneByCityAndStateIdAndPrice(Long city_id, Long state_id, ) {
+//        final var hotels = hotelRepository.queryHotelsByCity_IdAndCity_State_Id(city_id,state_id);
+//        return getListResponseEntityPriceForOne(hotels);
+//    }
 
     private ResponseEntity<List<HotelsListInCityResponse>> getListResponseEntityPriceForOne(List<Hotels> hotels) {
         List<HotelsListInCityResponse> hotelsList = new ArrayList<>();

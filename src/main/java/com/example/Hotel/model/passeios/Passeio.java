@@ -26,7 +26,7 @@ public class Passeio {
     @Column(name = "nome_passeio")
     private String nomePasseio;
 
-    @Column(name = "descricao_passeio")
+    @Column(name = "descricao_passeio", length = 999)
     private String descricao;
 
 //    @ManyToOne

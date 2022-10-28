@@ -16,7 +16,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/clients")
+@RequestMapping("/dados_do_usuario")
 public class UsuarioControler {
     @Autowired
     private ClienteRepository clientRepository;
@@ -27,17 +27,20 @@ public class UsuarioControler {
         return clientRepository.findAll();
     }
 
-    @GetMapping("/{clientId}")
-    public ResponseEntity<ClienteResponse> find(@PathVariable("clientId") Long id) {
+    @GetMapping("/{userId}")
+    public ResponseEntity<ClienteResponse> find(@PathVariable("userId") Long id) {
        final var client = clientRepository.findById(id).orElseThrow(() -> new EntityNotFound("Cliente não encontrado"));
     if (client != null) {
         final var response = new ClienteResponse(
+                client.getNameComplete(),
             client.getUsername(),
             client.getCpf(),
             client.getPhone(),
             client.getEmail(),
-            client.getAddress());
-
+            client.getAddress(),
+                new ClienteResponse.Nascimento(
+            client.getDataNacimento()
+                ));
             return ResponseEntity.ok(response);
         } else {
             return ResponseEntity.notFound().build();

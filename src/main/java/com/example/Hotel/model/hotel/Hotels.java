@@ -43,6 +43,16 @@ public class Hotels {
     @Column(length = 5)
     private Integer star;
 
+    private Integer Destaque;
+
+    public Integer getDestaque() {
+        return Destaque;
+    }
+
+    public void setDestaque(Integer destaque) {
+        Destaque = destaque;
+    }
+
     public Categoria getCategoria() {
         return categoria;
     }

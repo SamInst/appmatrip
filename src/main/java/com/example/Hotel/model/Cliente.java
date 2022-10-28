@@ -17,6 +17,53 @@ public class Cliente {
     @Column(name = "client_complete_name", length = 100)
     private String nameComplete;
 
+    public String getNameComplete() {
+        return nameComplete;
+    }
+
+    public void setNameComplete(String nameComplete) {
+        this.nameComplete = nameComplete;
+    }
+
+    public String getPhoneConfirm() {
+        return phoneConfirm;
+    }
+
+    public void setPhoneConfirm(String phoneConfirm) {
+        this.phoneConfirm = phoneConfirm;
+    }
+
+    public String getEmailConfirm() {
+        return emailConfirm;
+    }
+
+    public void setEmailConfirm(String emailConfirm) {
+        this.emailConfirm = emailConfirm;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getPasswordConfirm() {
+        return passwordConfirm;
+    }
+
+    public void setPasswordConfirm(String passwordConfirm) {
+        this.passwordConfirm = passwordConfirm;
+    }
+
+    public LocalDate getDataNacimento() {
+        return dataNacimento;
+    }
+
+    public void setDataNacimento(LocalDate dataNacimento) {
+        this.dataNacimento = dataNacimento;
+    }
 
     @Column(name = "client_cpf")
     private String cpf;

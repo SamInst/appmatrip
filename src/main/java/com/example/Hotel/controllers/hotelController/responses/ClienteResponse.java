@@ -1,10 +1,18 @@
 package com.example.Hotel.controllers.hotelController.responses;
 
+import java.time.LocalDate;
+
 public record ClienteResponse(
-        String name,
+        String nome_completo,
+        String apelido,
         String cpf,
-        String phone,
+        String telefone,
         String email,
-        String address
-){}
+        String endereco,
+        Nascimento nascimento
+){
+    public record Nascimento(
+            LocalDate aniversario
+    ){}
+}
 
