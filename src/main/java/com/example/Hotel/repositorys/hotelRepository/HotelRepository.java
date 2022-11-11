@@ -45,4 +45,8 @@ public interface HotelRepository extends JpaRepository<Hotels, Long> {
     //------------------------------------------------------------------------------------------------------------------
     @Query(value = "select u from Hotels u where u.Destaque = 1 ")
     List<Hotels> queryHotelsByDestaque (Integer destaque);
+
+//    @Query(value = "select u from Hotels inner join ReservarHotel ")
+
+
 }
