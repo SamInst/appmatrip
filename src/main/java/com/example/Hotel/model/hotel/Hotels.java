@@ -1,7 +1,7 @@
 package com.example.Hotel.model.hotel;
 
-import com.example.Hotel.model.Categoria;
-import com.example.Hotel.model.Cidade;
+import com.example.Hotel.model.outros.Categoria;
+import com.example.Hotel.model.outros.Cidade;
 
 import javax.persistence.*;
 import java.util.Objects;

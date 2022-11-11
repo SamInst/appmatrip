@@ -1,6 +1,6 @@
 package com.example.Hotel.model.hotel;
 
-import com.example.Hotel.model.Cliente;
+import com.example.Hotel.model.outros.Cliente;
 
 import javax.persistence.*;
 import java.time.LocalDate;

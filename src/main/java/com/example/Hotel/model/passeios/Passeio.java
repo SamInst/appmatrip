@@ -1,7 +1,7 @@
 package com.example.Hotel.model.passeios;
 
-import com.example.Hotel.model.Categoria;
-import com.example.Hotel.model.Cidade;
+import com.example.Hotel.model.outros.Categoria;
+import com.example.Hotel.model.outros.Cidade;
 
 import javax.persistence.*;
 
@@ -43,10 +43,15 @@ public class Passeio {
 
     private int estrela;
 
+    private Integer Destaque;
 
+    public Integer getDestaque() {
+        return Destaque;
+    }
 
-
-
+    public void setDestaque(Integer destaque) {
+        Destaque = destaque;
+    }
 
     public PasseiosPrecos getPasseiosPrecos() {
         return passeiosPrecos;

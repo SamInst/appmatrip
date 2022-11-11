@@ -1,6 +1,6 @@
 package com.example.Hotel.controllers.hotelController;
 
-import com.example.Hotel.controllers.hotelController.responses.request.hotelRequest.HotelPrecoResponse;
+import com.example.Hotel.controllers.hotelController.responses.hotelResponses.request.hotelRequest.HotelPrecoResponse;
 import com.example.Hotel.exceptions.EntityInUse;
 import com.example.Hotel.exceptions.EntityNotFound;
 import com.example.Hotel.model.hotel.HotelPrecos;

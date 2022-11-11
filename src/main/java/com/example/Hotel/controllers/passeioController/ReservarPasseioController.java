@@ -1,7 +1,7 @@
 package com.example.Hotel.controllers.passeioController;
 
 
-import com.example.Hotel.controllers.hotelController.responses.PasseioResponse;
+import com.example.Hotel.controllers.passeioController.passeioResponse.PasseioResponse;
 
 import com.example.Hotel.exceptions.EntityDates;
 import com.example.Hotel.exceptions.EntityInUse;

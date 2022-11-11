@@ -1,12 +1,11 @@
 package com.example.Hotel.controllers.hotelController;
 
-import com.example.Hotel.controllers.hotelController.responses.request.hotelRequest.HotelsListInCityResponse;
-import com.example.Hotel.controllers.hotelController.responses.request.hotelRequest.HotelsListInCityResponse2;
-import com.example.Hotel.controllers.hotelController.responses.request.hotelRequest.HotelsResponse;
+import com.example.Hotel.controllers.hotelController.responses.hotelResponses.request.hotelRequest.HotelsListInCityResponse;
+import com.example.Hotel.controllers.hotelController.responses.hotelResponses.request.hotelRequest.HotelsListInCityResponse2;
+import com.example.Hotel.controllers.hotelController.responses.hotelResponses.request.hotelRequest.HotelsResponse;
 import com.example.Hotel.model.hotel.Hotels;
 import com.example.Hotel.exceptions.EntityInUse;
 import com.example.Hotel.exceptions.EntityNotFound;
-import com.example.Hotel.model.hotel.ReservarHotel;
 import com.example.Hotel.repositorys.hotelRepository.HotelRepository;
 import com.example.Hotel.services.hotelServices.HotelRegistrationService;
 import com.example.Hotel.services.hotelServices.HotelService;
@@ -15,7 +14,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -27,9 +25,7 @@ import static org.springframework.http.ResponseEntity.*;
 public class HotelController {
     @Autowired
     private HotelRepository hotelRepository;
-
     private final HotelRegistrationService hotelRegistrationService;
-
 
     private final HotelService hotelService;
     private final static Long  HOTEL_CATEGORIA = 1L;
@@ -44,7 +40,7 @@ public class HotelController {
         return hotelRepository.findAll();
     }
 
-    @GetMapping("/{hotelId}") //----------------------------------------------------------------------------------
+    @GetMapping("/{hotelId}") //--------------------------------------------------------------------------------------
     public ResponseEntity<HotelsResponse> find(@PathVariable("hotelId") Long id) {
         final var hotels = hotelRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFound("Hotel not found"));
@@ -74,12 +70,12 @@ public class HotelController {
     }
 
     @ResponseStatus(HttpStatus.CREATED)
-    @PostMapping //-----------------------------------------------------------------------------------------------
+    @PostMapping //---------------------------------------------------------------------------------------------------
     public Hotels add(@RequestBody Hotels hotels) {
         return hotelRegistrationService.add(hotels);
     }
 
-    @PutMapping("/{hotelId}") //----------------------------------------------------------------------------------
+    @PutMapping("/{hotelId}") //--------------------------------------------------------------------------------------
     public Hotels update(@PathVariable Long hotelId, @RequestBody Hotels hotels) {
         Hotels hotels1 = hotelRepository.findById(hotelId).get();
             BeanUtils.copyProperties(hotels, hotels1, "id","city","ein","categoria");
@@ -97,13 +93,13 @@ public class HotelController {
         }
     }
 
-//    @GetMapping("/findHotelsByStateId") //-------------------------------------------------------------------------------
+//    @GetMapping("/findHotelsByStateId") //----------------------------------------------------------------------------
 //    public ResponseEntity<List<HotelsListInCityResponse>> findHotelsByStateId(@RequestParam (name = "state_id") Long state_id) {
 //        final var hotels = hotelRepository.queryHotelsByCity_State_IdAndCategoria_Id(state_id, HOTEL_CATEGORIA);
 //        return getListResponseEntityPriceForOne(hotels);
 //    }
 
-    @GetMapping("/findHotelsByDestaques") //-------------------------------------------------------------------------------
+    @GetMapping("/findHotelsByDestaques") //--------------------------------------------------------------------------
     public ResponseEntity<List<HotelsListInCityResponse>> findHotelsByDestaques(Integer destaque) {
         final var hotels = hotelRepository.queryHotelsByDestaque(destaque);
         return getListResponseEntityPriceForOne(hotels);
@@ -123,27 +119,32 @@ public class HotelController {
 //    }
 
     @GetMapping("/findByPriceBetweenAndAmountOfPeople") //------------------------------------------------------------
-    public ResponseEntity<List<HotelsListInCityResponse>> findByPriceBetweenTwoPersons(Integer quantidadePessoa, Float price1, Float price2) {
+    public ResponseEntity<List<HotelsListInCityResponse>> findByPriceBetweenTwoPersons(Integer quantidadePessoa,
+                                                                                       Float price1, Float price2) {
         return hotelService.PriceBetween(quantidadePessoa, price1, price2);
     }
 
 //    @GetMapping("/findByPriceBetweenAndCityId") //--------------------------------------------------------------------
-//    public ResponseEntity<List<HotelsListInCityResponse>> findByPriceBetween(Integer quantidadePessoa, Float price1, Float price2, Long id) {
+//    public ResponseEntity<List<HotelsListInCityResponse>> findByPriceBetween(Integer quantidadePessoa, Float price1,
+//    Float price2, Long id) {
 //        return hotelService.PriceBetweenAndCityID(quantidadePessoa, price1, price2, id);
 //    }
 
-//    @GetMapping("/findByPriceBetweenAndCityName") //--------------------------------------------------------------------
-//    public ResponseEntity<List<HotelsListInCityResponse>> findByPriceBetweenAndCityName(Integer quantidadePessoa,Float price1, Float price2, String name) {
+//    @GetMapping("/findByPriceBetweenAndCityName") //------------------------------------------------------------------
+//    public ResponseEntity<List<HotelsListInCityResponse>> findByPriceBetweenAndCityName(Integer quantidadePessoa,
+//    Float price1, Float price2, String name) {
 //        return hotelService.PriceBetweenAndCityName(quantidadePessoa, price1, price2, name);
 //    }
 
-//    @GetMapping("/findHotelPriceByAmountPeopleAndCityAndStateId") //--------------------------------------------------------------------
-//    public ResponseEntity<List<HotelsListInCityResponse>> findHotelPriceOneByCityAndStateId(Integer quantidadePessoa, Long city_id, Long state_id) {
+//    @GetMapping("/findHotelPriceByAmountPeopleAndCityAndStateId") //--------------------------------------------------
+//    public ResponseEntity<List<HotelsListInCityResponse>> findHotelPriceOneByCityAndStateId(Integer quantidadePessoa,
+//    Long city_id, Long state_id) {
 //        return hotelService.PriceBetweenAndCity_IdAndState_Id(quantidadePessoa, city_id, state_id);
 //    }
 
-    @GetMapping("/QueryBy_DataEntry_DataOut_AmountPeople_TotalPrice") //--------------------------------------------------------------------
-    public ResponseEntity<List<HotelsListInCityResponse2>> testData(LocalDate dataEntry, LocalDate dataOut, Integer quantidadePessoa, Long city_id, Long state_id) {
+    @GetMapping("/QueryBy_DataEntry_DataOut_AmountPeople_TotalPrice") //----------------------------------------------
+    public ResponseEntity<List<HotelsListInCityResponse2>> testData(LocalDate dataEntry, LocalDate dataOut,
+                                                                    Integer quantidadePessoa, Long city_id, Long state_id) {
         return hotelService.QueryBy_CityId_StateId_DataEntry_DataOut(dataEntry,dataOut, quantidadePessoa, city_id, state_id);
     }
 

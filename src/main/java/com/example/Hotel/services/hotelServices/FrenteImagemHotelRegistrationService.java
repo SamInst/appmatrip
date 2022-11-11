@@ -1,13 +1,13 @@
 package com.example.Hotel.services.hotelServices;
 
-import com.example.Hotel.controllers.hotelController.responses.request.hotelRequest.PhotoRequest;
+import com.example.Hotel.controllers.hotelController.responses.hotelResponses.request.hotelRequest.PhotoRequest;
 import com.example.Hotel.exceptions.EntityInUse;
 import com.example.Hotel.exceptions.EntityNotFound;
 import com.example.Hotel.model.hotel.HotelFrenteFoto;
 import com.example.Hotel.model.hotel.Hotels;
 import com.example.Hotel.repositorys.hotelRepository.FrenteImageHotelRepository;
 import com.example.Hotel.repositorys.hotelRepository.HotelRepository;
-import com.example.Hotel.services.ServerUtil;
+import com.example.Hotel.services.outrosServices.ServerUtil;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
