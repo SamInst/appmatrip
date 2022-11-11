@@ -1,9 +1,9 @@
 package com.example.Hotel.services.usuarioServices;
 
-import com.example.Hotel.model.Cliente;
+import com.example.Hotel.model.outros.Cliente;
 import com.example.Hotel.exceptions.EntityInUse;
 import com.example.Hotel.exceptions.EntityNotFound;
-import com.example.Hotel.repositorys.ClienteRepository;
+import com.example.Hotel.repositorys.outrosRepository.ClienteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;

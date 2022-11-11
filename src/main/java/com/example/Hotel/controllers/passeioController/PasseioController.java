@@ -1,7 +1,7 @@
 package com.example.Hotel.controllers.passeioController;
 
 
-import com.example.Hotel.controllers.hotelController.responses.request.PasseioPrecoUnicoResponse;
+import com.example.Hotel.controllers.passeioController.passeioResponse.PasseioPrecoUnicoResponse;
 import com.example.Hotel.exceptions.EntityInUse;
 import com.example.Hotel.exceptions.EntityNotFound;
 import com.example.Hotel.model.passeios.Passeio;
@@ -123,6 +123,13 @@ public class PasseioController {
         final var passeios = passeioRepository.queryByPasseiosPrecos_PriceOneBetweenAndCidade_Name(price1, price2, name.trim().toUpperCase());
         return getListResponseEntityPriceForOne(passeios);
     }
+
+    @GetMapping("/findPasseiosByDestaques") //--------------------------------------------------------------------------
+    public ResponseEntity<List<PasseioPrecoUnicoResponse>> findPasseiosByDestaques(Integer destaque) {
+        final var passeios = passeioRepository.queryPasseioByDestaque(destaque);
+        return getListResponseEntityPriceForOne(passeios);
+    }
+
     private ResponseEntity<List<PasseioPrecoUnicoResponse>> getListResponseEntityPriceForOne(List<Passeio> passeios) {
         List<PasseioPrecoUnicoResponse> passeioPrecoUnicoResponses = new ArrayList<>();
         passeios.forEach(

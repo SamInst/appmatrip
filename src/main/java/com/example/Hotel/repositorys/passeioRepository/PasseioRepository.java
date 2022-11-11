@@ -1,5 +1,6 @@
 package com.example.Hotel.repositorys.passeioRepository;
 
+import com.example.Hotel.model.hotel.Hotels;
 import com.example.Hotel.model.passeios.Passeio;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -27,4 +28,7 @@ public interface PasseioRepository extends JpaRepository<Passeio, Long> {
     List<Passeio> queryByPasseiosPrecos_PriceOneBetweenAndCidade_Name(Float price1, Float price2, String name);
 
     List<Passeio> queryPasseioByCidade_State_IdAndCategoria_Id(Long state_id, Long categoria);
+
+    @Query(value = "select u from Passeio u where u.Destaque = 1 ")
+    List<Passeio> queryPasseioByDestaque (Integer destaque);
 }

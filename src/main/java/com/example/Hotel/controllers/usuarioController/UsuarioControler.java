@@ -1,10 +1,10 @@
 package com.example.Hotel.controllers.usuarioController;
 
-import com.example.Hotel.controllers.hotelController.responses.ClienteResponse;
-import com.example.Hotel.model.Cliente;
+import com.example.Hotel.controllers.outrosControllers.outrosResponses.ClienteResponse;
+import com.example.Hotel.model.outros.Cliente;
 import com.example.Hotel.exceptions.EntityInUse;
 import com.example.Hotel.exceptions.EntityNotFound;
-import com.example.Hotel.repositorys.ClienteRepository;
+import com.example.Hotel.repositorys.outrosRepository.ClienteRepository;
 import com.example.Hotel.services.usuarioServices.UsuarioRegistrationService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +13,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/dados_do_usuario")

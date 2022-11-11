@@ -1,6 +1,6 @@
 package com.example.Hotel.controllers.hotelController;
 
-import com.example.Hotel.controllers.hotelController.responses.request.hotelRequest.PhotoRequest;
+import com.example.Hotel.controllers.hotelController.responses.hotelResponses.request.hotelRequest.PhotoRequest;
 import com.example.Hotel.model.hotel.HotelFotos;
 import com.example.Hotel.repositorys.hotelRepository.TodasImagensDoHotelRepository;
 import com.example.Hotel.services.hotelServices.TodasImagensDoHotelRegistrationService;

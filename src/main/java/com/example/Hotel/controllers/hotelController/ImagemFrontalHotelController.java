@@ -1,7 +1,7 @@
 package com.example.Hotel.controllers.hotelController;
 
-import com.example.Hotel.controllers.hotelController.responses.request.hotelRequest.FrontalPhotoRequest;
-import com.example.Hotel.controllers.hotelController.responses.request.hotelRequest.PhotoRequest;
+import com.example.Hotel.controllers.hotelController.responses.hotelResponses.request.hotelRequest.FrontalPhotoRequest;
+import com.example.Hotel.controllers.hotelController.responses.hotelResponses.request.hotelRequest.PhotoRequest;
 import com.example.Hotel.model.hotel.HotelFrenteFoto;
 import com.example.Hotel.repositorys.hotelRepository.FrenteImageHotelRepository;
 import com.example.Hotel.services.hotelServices.FrenteImagemHotelRegistrationService;
