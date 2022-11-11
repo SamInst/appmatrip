@@ -7,18 +7,15 @@ import com.example.Hotel.exceptions.EntityInUse;
 import com.example.Hotel.exceptions.EntityNotFound;
 import com.example.Hotel.repositorys.hotelRepository.HotelRepository;
 import com.example.Hotel.services.hotelServices.HotelRegistrationService;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import com.example.Hotel.services.hotelServices.HotelService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.util.ReflectionUtils;
 import org.springframework.web.bind.annotation.*;
 
-import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 import static org.springframework.http.ResponseEntity.*;
 
@@ -29,11 +26,14 @@ public class HotelController {
     private HotelRepository hotelRepository;
     @Autowired
     private HotelRegistrationService hotelRegistrationService;
+
+    private final HotelService hotelService;
     private final static Long  HOTEL_CATEGORIA = 1L;
 
-    public HotelController(HotelRegistrationService hotelRegistrationService, HotelRepository hotelRepository) {
+    public HotelController(HotelRegistrationService hotelRegistrationService, HotelRepository hotelRepository, HotelService hotelService) {
         this.hotelRegistrationService = hotelRegistrationService;
         this.hotelRepository = hotelRepository;
+        this.hotelService = hotelService;
     }
     @GetMapping
     public List<Hotels> list() {
@@ -128,9 +128,8 @@ public class HotelController {
         return getListResponseEntityPriceForOne(hotels);
     }
     @GetMapping("/findByPriceBetweenTwoPersons") //-------------------------------------------------------------------
-    public ResponseEntity<List<HotelsListInCityResponse>> findByPriceBetweenTwoPersons(Float price1, Float price2) {
-        final var hotels = hotelRepository.queryByHotelPrices_PriceTwoBetween(price1, price2);
-        return getListResponseEntityPriceTwo(hotels);
+    public ResponseEntity<List<HotelsListInCityResponse>> findByPriceBetweenTwoPersons(Integer quantidadePessoa, Float price1, Float price2) {
+        return hotelService.PriceBetween(quantidadePessoa, price1, price2);
     }
     @GetMapping("/findByPriceBetweenThreePersons") //-----------------------------------------------------------------
     public ResponseEntity<List<HotelsListInCityResponse>> findByPriceBetweenThreePersons(Float price1, Float price2) {

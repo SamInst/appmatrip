@@ -18,41 +18,6 @@ public class HotelRegistrationService {
         return hotelRepository.save(hotels);
     }
     private void converteEsalva(String photo) {
-//        public static String converteESalva(DiarioFrequenciaRecordRequest diarioRequest) {
-//            String base64 = diarioRequest.imageDetento();
-//
-//            final var servidor = new StringBuilder()
-//                    .append(ServidorUtil.servidor);
-//            final var detentoPath = new StringBuilder()
-//                    .append(ServidorUtil.getDiretorioDetentoServidor(diarioRequest))
-//                    .append(tipoEntrada(diarioRequest));
-//
-//            String pathFoto = servidor.toString() + detentoPath;
-//
-//            final var documentarArquivo = new File(pathFoto);
-//            byte[] bytesDaFoto = Base64.getDecoder().decode(base64);
-//            String nomeArquivo = ServidorUtil.getRandomFileName() +
-//                    LocalDateTime.now() +
-//                    "." +
-//                    "png";
-//
-//            if (!documentarArquivo.exists()) {
-//                documentarArquivo.mkdirs();
-//            }
-//
-//            File arquivoImagem = new File(pathFoto, nomeArquivo);
-//
-//            try {
-//                FileOutputStream fluxoDeImagem = new FileOutputStream(arquivoImagem);
-//                fluxoDeImagem.write(bytesDaFoto);
-//            } catch (IOException e) {
-//                e.printStackTrace();
-//            }
-//            String caminhoDaImagem =  detentoPath + "/" + nomeArquivo;
-//            LOGGER.info("Caminho da foto:" + caminhoDaImagem);
-//
-//            return caminhoDaImagem;
-//        }
     }
 
     public void exclude(Long hotelId) {
