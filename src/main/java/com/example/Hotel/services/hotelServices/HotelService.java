@@ -122,7 +122,6 @@ public class HotelService {
         List<HotelsListInCityResponse> hotelsList = new ArrayList<>();
         hotels.forEach(hotel1 ->
         {
-
             if (quantidadePessoa == 1){
                 price = hotel1.getHotelPrices().getPriceOne();
             } else if (quantidadePessoa == 2) {
