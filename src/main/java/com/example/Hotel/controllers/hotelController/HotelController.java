@@ -119,8 +119,7 @@ public class HotelController {
 //    }
 
     @GetMapping("/findByPriceBetweenAndAmountOfPeople") //------------------------------------------------------------
-    public ResponseEntity<List<HotelsListInCityResponse>> findByPriceBetweenTwoPersons(Integer quantidadePessoa,
-                                                                                       Float price1, Float price2) {
+    public ResponseEntity<List<HotelsListInCityResponse>> findByPriceBetweenTwoPersons(Integer quantidadePessoa, Float price1, Float price2) {
         return hotelService.PriceBetween(quantidadePessoa, price1, price2);
     }
 
