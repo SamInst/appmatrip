@@ -98,23 +98,7 @@ public class HotelService {
 //    }
 
     public ResponseEntity<List<HotelsListInCityResponse2>> QueryBy_CityId_StateId_DataEntry_DataOut(LocalDate dataEntry, LocalDate dataOut, Integer quantidadePessoa, Long city_id, Long state_id){
-        List<Hotels> hotelsList = new ArrayList<>();
-        log.info("dataEntry:{} ", dataEntry);
-        log.info("dataOut:{} ", dataOut);
-
-        if (quantidadePessoa == 1){
-            hotelsList.addAll(hotelRepository.queryHotelsByCity_IdAndCity_State_Id(city_id, state_id));
-        } else if (quantidadePessoa == 2) {
-            hotelsList.addAll(hotelRepository.queryHotelsByCity_IdAndCity_State_Id(city_id, state_id));
-        } else if (quantidadePessoa == 3) {
-            hotelsList.addAll(hotelRepository.queryHotelsByCity_IdAndCity_State_Id(city_id, state_id));
-        }else if (quantidadePessoa == 4) {
-            hotelsList.addAll(hotelRepository.queryHotelsByCity_IdAndCity_State_Id(city_id, state_id));
-        }else if (quantidadePessoa == 5) {
-            hotelsList.addAll(hotelRepository.queryHotelsByCity_IdAndCity_State_Id(city_id, state_id));
-        } else {
-            throw new EntityNotFound("Não existe reservas para essa quantidade de pessoas");
-        }
+        List<Hotels> hotelsList = new ArrayList<>(hotelRepository.queryHotelsByCity_IdAndCity_State_Id(city_id, state_id));
         return getListResponseEntityHotel(dataEntry,dataOut, quantidadePessoa, hotelsList);
     }
 
@@ -135,7 +119,6 @@ public class HotelService {
             } else {
                 throw new EntityNotFound("Tamanho não suportado");
             }
-
             hotelsList.add(new HotelsListInCityResponse(
                     new HotelsListInCityResponse.Categoria(
                             hotel1.getCategoria().getName()
