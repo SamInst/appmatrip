@@ -17,10 +17,9 @@ public class PackagesController {
     public PackagesController(PackageService packageService) {
         this.packageService = packageService;
     }
-
-    @GetMapping("/packages")
-    public ResponseEntity<List<PackageResponse>> packagePrice(LocalDate data_entry, LocalDate data_out, Integer quantidadePessoas,Long id){
-        return packageService.JajaDecidoONome(data_entry, data_out,quantidadePessoas,id);
+    @GetMapping
+    public ResponseEntity<List<PackageResponse>> packagePrice(LocalDate data_entry, LocalDate data_out, Integer amount_people,Long package_id){
+        return packageService.JajaDecidoONome(data_entry, data_out,amount_people,package_id);
 
     }
 }

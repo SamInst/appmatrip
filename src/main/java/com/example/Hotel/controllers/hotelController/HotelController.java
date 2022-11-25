@@ -142,8 +142,7 @@ public class HotelController {
 //    }
 
     @GetMapping("/QueryBy_DataEntry_DataOut_AmountPeople_TotalPrice") //----------------------------------------------
-    public ResponseEntity<List<HotelsListInCityResponse2>> testData(LocalDate dataEntry, LocalDate dataOut,
-                                                                    Integer quantidadePessoa, Long city_id, Long state_id) {
+    public ResponseEntity<List<HotelsListInCityResponse2>> testData(LocalDate dataEntry, LocalDate dataOut, Integer quantidadePessoa, Long city_id, Long state_id) {
         return hotelService.QueryBy_CityId_StateId_DataEntry_DataOut(dataEntry,dataOut, quantidadePessoa, city_id, state_id);
     }
 
