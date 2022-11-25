@@ -15,12 +15,12 @@ public interface PasseioRepository extends JpaRepository<Passeio, Long> {
     @Query(value = "select u from Passeio u where upper(trim(u.nomePasseio)) like %?1%")
     List<Passeio> findPasseioByNomePasseio (String name);
 
-    List<Passeio>findPasseioByCidade_Id(Long id);
+    List<Passeio>queryPasseioByCidade_IdAndCidade_State_Id(Long city_id, Long state_id);
 
     @Query(value = "select u from Passeio u join u.cidade  where upper(trim(u.cidade.name)) like %?1%")
-    List<Passeio> findPasseioByCidade_Name(String name);
 
-    List<Passeio> queryByPasseiosPrecos_PriceOneBetween(Float price1, Float price2);
+
+
 
     List<Passeio> queryByPasseiosPrecos_PriceOneBetweenAndCidade_Id (Float price1, Float price2, Long Id);
 
