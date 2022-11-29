@@ -1,10 +1,8 @@
 package com.example.Hotel.services.passeiosServices;
 
-import com.example.Hotel.controllers.hotelController.responses.hotelResponses.request.hotelRequest.HotelsListInCityResponse2;
 import com.example.Hotel.controllers.passeioController.passeioResponse.PasseioPrecoUnicoResponse;
 import com.example.Hotel.exceptions.EntityInUse;
 import com.example.Hotel.exceptions.EntityNotFound;
-import com.example.Hotel.model.hotel.Hotels;
 import com.example.Hotel.model.passeios.Passeio;
 
 import com.example.Hotel.repositorys.passeioRepository.PasseioRepository;
@@ -14,24 +12,21 @@ import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDate;
-import java.time.Period;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class PasseioService {
     @Autowired
     private PasseioRepository passeioRepository;
-
     Float price;
-
     public Passeio add(Passeio passeio) {
         return passeioRepository.save(passeio);
     }
 
-    public ResponseEntity<List<PasseioPrecoUnicoResponse>> QueryTripBy_CityId_StateId_DataEntry_DataOut( Integer quantidadePessoa, Long city_id, Long state_id){
-        List<Passeio> passeioList = new ArrayList<>(passeioRepository.queryPasseioByCidade_IdAndCidade_State_Id(city_id, state_id));
+    public ResponseEntity<List<PasseioPrecoUnicoResponse>> QueryTripBy_CityId_StateId_DataEntry_DataOut(Integer quantidadePessoa, Long city_id, Long state_id, Optional<Float> optionalPrice1, Optional<Float> optionalPrice2){
+        List<Passeio> passeioList = new ArrayList<>(passeioRepository.queryPasseioByCidade_IdAndCidade_State_IdAndPasseiosPrecos_PriceOneBetween(city_id, state_id, optionalPrice1, optionalPrice2));
         return getListResponseEntityPasseio(quantidadePessoa, passeioList);
     }
 
@@ -57,7 +52,6 @@ public class PasseioService {
         );
         return  ResponseEntity.ok(passeioList);
     }
-
 
     public void exclude(Long passeioId) {
        try {
