@@ -95,8 +95,8 @@ public class PasseioController {
     }
 
     @GetMapping("/findPasseiosByAmountPeople_CityID_StateID")
-    public ResponseEntity<List<PasseioPrecoUnicoResponse>> testData2(Integer quantidadePessoa, Long city_id, Long state_id) {
-    return passeioService.QueryTripBy_CityId_StateId_DataEntry_DataOut(quantidadePessoa, city_id, state_id);
+    public ResponseEntity<List<PasseioPrecoUnicoResponse>> testData2(Integer quantidadePessoa, Long city_id, Long state_id, Optional<Float> optionalPrice1, Optional<Float> optionalPrice2) {
+    return passeioService.QueryTripBy_CityId_StateId_DataEntry_DataOut(quantidadePessoa, city_id, state_id, optionalPrice1,optionalPrice2);
 }
 
     @GetMapping("/findPasseiosByDestaques") //--------------------------------------------------------------------------
