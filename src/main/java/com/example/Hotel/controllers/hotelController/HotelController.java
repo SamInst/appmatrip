@@ -15,7 +15,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -95,20 +94,18 @@ public class HotelController {
     }
 
     @GetMapping("/findHotelsByDestaques") //--------------------------------------------------------------------------
-    public ResponseEntity<List<HotelsListInCityResponse>> findHotelsByDestaques(Integer destaque) {
-        final var hotels = hotelRepository.queryHotelsByDestaque(destaque);
-        return getListResponseEntityPriceForOne(hotels);
+    public ResponseEntity<List<HotelsListInCityResponse>> findHotelsByDestaques(Integer quantidadePessoa ,Integer destaque) {
+        return hotelService.hotelsByDestaques(quantidadePessoa, destaque);
     }
 
     @GetMapping("/find/hotelsByName") //------------------------------------------------------------------------------
     @ResponseBody
-    public ResponseEntity<List<HotelsListInCityResponse>> hotelsByName(@RequestParam(name = "name") String name) {
-        final var hotels = hotelRepository.findByName(name.trim().toUpperCase());
-        return getListResponseEntityPriceForOne(hotels);
+    public ResponseEntity<List<HotelsListInCityResponse>> hotelsByName(Integer quantidadePessoa , String name) {
+        return hotelService.hotelsByName(quantidadePessoa, name);
     }
 
     @GetMapping("/findByPriceBetweenAndAmountOfPeople") //------------------------------------------------------------
-    public ResponseEntity<List<HotelsListInCityResponse2>> findByPriceBetweenTwoPersons(LocalDate dataEntry, LocalDate dataOut, Integer quantidadePessoa, Optional<Float> optionalPrice1, Optional<Float> optionalPrice2) {
+    public ResponseEntity<List<HotelsListInCityResponse2>> findByPriceBetweenAmountPersons(LocalDate dataEntry, LocalDate dataOut, Integer quantidadePessoa, Optional<Float> optionalPrice1, Optional<Float> optionalPrice2) {
         return hotelService.PriceBetween(dataEntry,dataOut,quantidadePessoa,optionalPrice1,optionalPrice2);
     }
 
@@ -122,23 +119,5 @@ public class HotelController {
         return hotelService.queryByCityID_StateID(dataEntry,dataOut,quantidadePessoa,city_id,state_id,hotelPrices,hotelPrices2, name);
     }
 
-    private ResponseEntity<List<HotelsListInCityResponse>> getListResponseEntityPriceForOne(List<Hotels> hotels) {
-        List<HotelsListInCityResponse> hotelsList = new ArrayList<>();
-        hotels.forEach(
-                hotel1 -> hotelsList.add(new HotelsListInCityResponse(
-                        new HotelsListInCityResponse.Categoria(
-                                hotel1.getCategoria().getName()
-                        ),
-                        new HotelsListInCityResponse.City(
-                                hotel1.getCity().getName(),
-                                hotel1.getCity().getState().getName()),
-                        hotel1.getName(),
-                        hotel1.getHotelDescription(),
-                        hotel1.getAddress(),
-                        new HotelsListInCityResponse.HotelPrices (
-                                hotel1.getHotelPrices().getPriceOne()),
-                        hotel1.getStar()
-                )));
-        return  ResponseEntity.ok(hotelsList);
-    }
+
 }
