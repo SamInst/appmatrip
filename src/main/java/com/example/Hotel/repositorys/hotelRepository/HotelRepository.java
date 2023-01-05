@@ -10,13 +10,16 @@ import java.util.Optional;
 
 @Repository
 public interface HotelRepository extends JpaRepository<Hotels, Long> {
-    @Query(value = "select u from Hotels u where upper(trim(u.name)) like %?1%")
-    List<Hotels> findByName (String name);
+    @Query(value = "select u from Hotels u where u.name like %:name% and u.city.id = :city and u.city.state.id = :state")
+    List<Hotels> findHotelsByNameAndCity_IdAndCity_State_Id (String name, Long city, Long state);
     List<Hotels> queryHotelsByHotelPrices_PriceOneBetween(Optional<Float> price1, Optional<Float> price2);
     List<Hotels> queryHotelsByHotelPrices_PriceTwoBetween(Optional<Float> price1, Optional<Float> price2);
     List<Hotels> queryHotelsByHotelPrices_PriceThreeBetween(Optional<Float> price1, Optional<Float> price2);
     List<Hotels> queryHotelsByHotelPrices_PriceFourBetween(Optional<Float> price1, Optional<Float> price2);
     List<Hotels> queryHotelsByHotelPrices_PriceFiveBetween(Optional<Float> price1, Optional<Float> price2);
+
+//    @Query(value = "select u from Hotels u where u.name like %:name% and u.city.id = :city and u.city.state.id = :state and u.hotelPrices.priceOne between :price1 and :price2")
+
 
     //------------------------------------------------------------------------------------------------------------------
 //    @Query("select u from Hotels u where upper(trim(u.name)) like %?1% and u.city.id = :city_id and u.city.state.id = :state_id and u.hotelPrices.priceOne between :price1 and :price2")
@@ -27,8 +30,11 @@ public interface HotelRepository extends JpaRepository<Hotels, Long> {
     List<Hotels> queryHotelsByCity_IdAndCity_State_IdAndNameAndHotelPrices_PriceFiveBetween(Long city_id, Long state_id, String name,  Float price1, Float price2);
 
     List<Hotels> queryHotelsByCity_IdAndCity_State_Id (Long city_id, Long state_id);
-    List<Hotels> queryHotelsByCity_IdAndCity_State_IdAndHotelPrices_PriceOneBetween (Long city_id, Long state_id, Float price1, Float price2);
 
     @Query(value = "select u from Hotels u where u.Destaque = 1 ")
     List<Hotels> queryHotelsByDestaque (Integer destaque);
+
+
+//    @Query(value = "select u from Hotels u where u.name like %:name% and u.city.id = :city and u.city.state.id = :state and u.hotelPrices.priceTwo between :price1 and :price2")
+//    List<Hotels> teste1 (String name, Long city_id, Long state_id, Float price1, Float price2);
 }

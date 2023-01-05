@@ -43,6 +43,31 @@ public class Hotels {
     @Column(length = 5)
     private Integer star;
 
+
+    @ManyToOne
+    @JoinColumn(name = "foto_frontal")
+    private HotelFrenteFoto hotelFrenteFoto;
+//
+//    @ManyToOne
+//    @JoinColumn(name = "todas_fotos")
+//    private HotelFotos hotelFotos;
+
+    public HotelFrenteFoto getHotelFrenteFoto() {
+        return hotelFrenteFoto;
+    }
+
+    public void setHotelFrenteFoto(HotelFrenteFoto hotelFrenteFoto) {
+        this.hotelFrenteFoto = hotelFrenteFoto;
+    }
+
+//    public HotelFotos getHotelFotos() {
+//        return hotelFotos;
+//    }
+//
+//    public void setHotelFotos(HotelFotos hotelFotos) {
+//        this.hotelFotos = hotelFotos;
+//    }
+
     private Integer Destaque;
 
     public Integer getDestaque() {

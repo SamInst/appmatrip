@@ -100,9 +100,8 @@ public class PasseioController {
 }
 
     @GetMapping("/findPasseiosByDestaques") //--------------------------------------------------------------------------
-    public ResponseEntity<List<PasseioPrecoUnicoResponse>> findPasseiosByDestaques(Integer destaque) {
-        final var passeios = passeioRepository.queryPasseioByDestaque(destaque);
-        return getListResponseEntityPriceForOne(passeios);
+    public ResponseEntity<List<PasseioPrecoUnicoResponse>> findPasseiosByDestaques(Integer destaque, Integer quantidadePessoa) {
+        return passeioService.PasseiosByDestaques(destaque, quantidadePessoa);
     }
 
     private ResponseEntity<List<PasseioPrecoUnicoResponse>> getListResponseEntityPriceForOne(List<Passeio> passeios) {

@@ -2,29 +2,39 @@ package com.example.Hotel.services.hotelServices;
 
 import com.example.Hotel.controllers.hotelController.responses.hotelResponses.request.hotelRequest.HotelsListInCityResponse;
 import com.example.Hotel.controllers.hotelController.responses.hotelResponses.request.hotelRequest.HotelsListInCityResponse2;
+import com.example.Hotel.controllers.hotelController.responses.hotelResponses.request.hotelRequest.HotelsResponse;
+import com.example.Hotel.exceptions.EntityInUse;
 import com.example.Hotel.exceptions.EntityNotFound;
 import com.example.Hotel.model.hotel.Hotels;
 import com.example.Hotel.repositorys.hotelRepository.HotelRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.BeanUtils;
+import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import java.time.LocalDate;
 import java.time.Period;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import static org.springframework.http.ResponseEntity.*;
+import static org.springframework.http.ResponseEntity.status;
+
 @Service
 public class HotelService {
     Float price;
-
     private final Logger log = LoggerFactory.getLogger(this.getClass());
     private final HotelRepository hotelRepository;
 
     public HotelService(HotelRepository hotelRepository) {
         this.hotelRepository = hotelRepository;
+
     }
 
     public ResponseEntity<List<HotelsListInCityResponse2>> PriceBetween (LocalDate dataEntry, LocalDate dataOut, Integer quantidadePessoa, Optional<Float> optionalPrice1, Optional<Float> optionalPrice2 ){
@@ -45,24 +55,20 @@ public class HotelService {
     return getListResponseEntityHotel( dataEntry, dataOut, quantidadePessoa, hotelsList);
 }
 
-
-    public ResponseEntity<List<HotelsListInCityResponse2>> QueryBy_CityId_StateId_DataEntry_DataOut(
-            LocalDate dataEntry, LocalDate dataOut, Integer quantidadePessoa, Long city_id, Long state_id){
-
+    public ResponseEntity<List<HotelsListInCityResponse2>> QueryBy_CityId_StateId_DataEntry_DataOut(LocalDate dataEntry, LocalDate dataOut, Integer quantidadePessoa, Long city_id, Long state_id){
         List<Hotels> hotelsList = new ArrayList<>(hotelRepository.queryHotelsByCity_IdAndCity_State_Id(city_id, state_id));
         return getListResponseEntityHotel(dataEntry,dataOut, quantidadePessoa, hotelsList);
     }
 
-    public ResponseEntity<List<HotelsListInCityResponse>> hotelsByName(Integer quantidadePessoa, String name) {
-        final var hotelsList = hotelRepository.findByName(name.trim().toUpperCase());
-        return getListResponseEntityHotel2(quantidadePessoa,hotelsList);
+    public ResponseEntity<List<HotelsListInCityResponse2>> queryHotelsByName (LocalDate dataEntry, LocalDate dataOut, Integer quantidadePessoa, Long city_id, Long state_id, String name){
+        List<Hotels> hotelsList = new ArrayList<>( hotelRepository.findHotelsByNameAndCity_IdAndCity_State_Id(name, city_id, state_id));
+        return getListResponseEntityHotel(dataEntry,dataOut,quantidadePessoa,hotelsList);
     }
 
     public ResponseEntity<List<HotelsListInCityResponse>> hotelsByDestaques(Integer destaque, Integer quantidadePessoa) {
         final var hotelsList = hotelRepository.queryHotelsByDestaque(destaque);
         return getListResponseEntityHotel2(destaque, hotelsList);
     }
-
 
     private ResponseEntity<List<HotelsListInCityResponse2>> getListResponseEntityHotel(LocalDate dataEntry, LocalDate dataOut,Integer quantidadePessoa, List<Hotels> hotels) {
 
@@ -92,7 +98,7 @@ public class HotelService {
         );
         return  ResponseEntity.ok(hotelsList);
     }
-        public ResponseEntity<List<HotelsListInCityResponse2>> queryByCityID_StateID (LocalDate dataEntry, LocalDate dataOut, Integer quantidadePessoa, Long city_id, Long city_state_id, Float optionalPrice1, Float optionalPrice2, String name ){
+        public ResponseEntity<List<HotelsListInCityResponse2>> queryHotelsByCityID_StateID_AndName_And_HotelPricesBetween (LocalDate dataEntry, LocalDate dataOut, Integer quantidadePessoa, Long city_id, Long city_state_id, Float optionalPrice1, Float optionalPrice2, String name ){
         List<Hotels> hotelsList = new ArrayList<>();
 
         if (quantidadePessoa == 1) {
@@ -110,8 +116,7 @@ public class HotelService {
     }
     return getListResponseEntityHotel(dataEntry,dataOut, quantidadePessoa, hotelsList);
 }
-    private ResponseEntity<List<HotelsListInCityResponse>> getListResponseEntityHotel2(
-            Integer quantidadePessoa, List<Hotels> hotels) {
+    private ResponseEntity<List<HotelsListInCityResponse>> getListResponseEntityHotel2(Integer quantidadePessoa, List<Hotels> hotels) {
 
         List<HotelsListInCityResponse> hotelsList = new ArrayList<>();
         hotels.forEach(hotel1 ->
@@ -153,6 +158,61 @@ public class HotelService {
             throw new EntityNotFound("Tamanho não suportado");
         }
     }
+    public ResponseEntity<HotelsResponse> findHotelById(Long id){
+        final var hotels = hotelRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFound("Hotel not found"));
+        if (hotels != null) {
+            final var response = new HotelsResponse(
+                    hotels.getName(),
+                    hotels.getEin(),
+                    hotels.getPhone(),
+                    hotels.getHotelDescription(),
+                    new HotelsResponse.City(
+                            hotels.getCity().getName(),
+                            hotels.getCity().getState().getName()
+                    ),
+                    hotels.getAddress(),
+                    new HotelsResponse.HotelPrices(
+                            hotels.getHotelPrices().getPriceOne(),
+                            hotels.getHotelPrices().getPriceTwo(),
+                            hotels.getHotelPrices().getPriceThree(),
+                            hotels.getHotelPrices().getPriceFour(),
+                            hotels.getHotelPrices().getPriceFive()),
+                    hotels.getStar()
+            );
+            return ok(response);
+        } else {
+            return notFound().build();
+        }
+    }
 
+    public ResponseEntity<Hotels> deleteById(Long hotelId){
+        try {
+            exclude(hotelId);
+            return noContent().build();
+        } catch (EntityNotFound e) {
+            return notFound().build();
+        } catch (EntityInUse e) {
+            return status(HttpStatus.CONFLICT).build();
+        }
+    }
 
+    public Hotels updateById(@PathVariable Long hotelId, @RequestBody Hotels hotels){
+        Hotels hotels1 = hotelRepository.findById(hotelId).get();
+        BeanUtils.copyProperties(hotels, hotels1, "id", "city", "ein", "categoria");
+        return hotelRepository.save(hotels1);
+    }
+
+    public Hotels add(Hotels hotels) {
+        return hotelRepository.save(hotels);
+    }
+    public void exclude(Long hotelId) {
+        try {
+            hotelRepository.deleteById(hotelId);
+        } catch (EmptyResultDataAccessException e){
+            throw new EntityNotFound("Hotel code % not found" + hotelId);
+        } catch (DataIntegrityViolationException e) {
+            throw new EntityInUse("Hotel code % could be not removed," + hotelId);
+        }
+    }
 }

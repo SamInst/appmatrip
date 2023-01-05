@@ -4,14 +4,12 @@ import com.example.Hotel.controllers.passeioController.passeioResponse.PasseioPr
 import com.example.Hotel.exceptions.EntityInUse;
 import com.example.Hotel.exceptions.EntityNotFound;
 import com.example.Hotel.model.passeios.Passeio;
-
 import com.example.Hotel.repositorys.passeioRepository.PasseioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -34,7 +32,7 @@ public class PasseioService {
         List<PasseioPrecoUnicoResponse> passeioList = new ArrayList<>();
         passeio.forEach(passeio1 ->
                 {
-                    price = quantidadePessoa * passeio1.getPasseiosPrecos().getPriceOne();
+                    price = (passeio1.getPasseiosPrecos().getPriceOne() * quantidadePessoa);
                     passeioList.add(new PasseioPrecoUnicoResponse(
                             new PasseioPrecoUnicoResponse.Categoria(
                             passeio1.getCategoria().getName()),
@@ -51,6 +49,11 @@ public class PasseioService {
                 }
         );
         return  ResponseEntity.ok(passeioList);
+    }
+
+    public ResponseEntity<List<PasseioPrecoUnicoResponse>> PasseiosByDestaques(Integer destaque, Integer quantidadePessoa) {
+        final var passeiosList = passeioRepository.queryPasseioByDestaque(destaque);
+        return getListResponseEntityPasseio(destaque, passeiosList);
     }
 
     public void exclude(Long passeioId) {

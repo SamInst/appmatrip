@@ -51,7 +51,7 @@ public class PackageService {
                 throw new EntityNotFound("Tamanho não suportado");
             }
             Integer p1 = Period.between(dataEntry, dataOut).getDays();
-            var totalHotel = p1*priceHotel;
+            var totalHotel = p1 * priceHotel;
             Float total = totalHotel + pricePasseio;
 
             packageList.add(new PackageResponse(

@@ -3,19 +3,19 @@ package com.example.Hotel.model.hotel;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "BI02_FOTO_BIBLIOTECA")
-@SequenceGenerator(name = "BI02_FOTO_BIBLIOTECA_SEQ", sequenceName = "BI02_FOTO_BIBLIOTECA_SEQ", allocationSize = 1)
+@Table(name = "BI02_FOTO_FRONTAL")
+@SequenceGenerator(name = "BI02_FOTO_FRONTAL_SEQ", sequenceName = "BI02_FOTO_FRONTAL_SEQ", allocationSize = 1)
 public class HotelFrenteFoto {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "BI02_FOTO_BIBLIOTECA_SEQ")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "BI02_FOTO_FRONTAL_SEQ")
     @Column(name = "BI02_COD_FOTO_BIBLIOTECA")
     private Long id;
 
     @Column(name = "BI02_PATH")
     private String path;
 
-    @Column(name = "image_title")
+    @Column(name = "image_title", length = 99999)
     private String title;
 
     public String getTitle() {

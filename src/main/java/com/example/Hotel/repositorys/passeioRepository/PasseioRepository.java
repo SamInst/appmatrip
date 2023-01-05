@@ -17,6 +17,6 @@ public interface PasseioRepository extends JpaRepository<Passeio, Long> {
 
     List<Passeio>queryPasseioByCidade_IdAndCidade_State_IdAndPasseiosPrecos_PriceOneBetween(Long city_id, Long state_id, Optional<Float> price1, Optional<Float> price2);
 
-    @Query(value = "select u from Passeio u where u.Destaque = 1 ")
+    @Query(value = "select u from Passeio u where u.Destaque = :destaque ")
     List<Passeio> queryPasseioByDestaque (Integer destaque);
 }
