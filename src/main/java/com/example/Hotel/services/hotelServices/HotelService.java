@@ -34,7 +34,6 @@ public class HotelService {
 
     public HotelService(HotelRepository hotelRepository) {
         this.hotelRepository = hotelRepository;
-
     }
 
     public ResponseEntity<List<HotelsListInCityResponse2>> PriceBetween (LocalDate dataEntry, LocalDate dataOut, Integer quantidadePessoa, Optional<Float> optionalPrice1, Optional<Float> optionalPrice2 ){
@@ -70,7 +69,7 @@ public class HotelService {
         return getListResponseEntityHotel2(destaque, hotelsList);
     }
 
-    private ResponseEntity<List<HotelsListInCityResponse2>> getListResponseEntityHotel(LocalDate dataEntry, LocalDate dataOut,Integer quantidadePessoa, List<Hotels> hotels) {
+    public ResponseEntity<List<HotelsListInCityResponse2>> getListResponseEntityHotel(LocalDate dataEntry, LocalDate dataOut,Integer quantidadePessoa, List<Hotels> hotels) {
 
         List<HotelsListInCityResponse2> hotelsList = new ArrayList<>();
         hotels.forEach(hotel1 ->

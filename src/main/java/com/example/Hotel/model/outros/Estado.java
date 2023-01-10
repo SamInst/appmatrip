@@ -12,6 +12,11 @@ public class Estado {
     @Column(name = "state_name")
     private String name;
 
+    public Estado(Long id, String name) {
+        this.id = id;
+        this.name = name;
+    }
+
 
     public String getName() {
         return name;

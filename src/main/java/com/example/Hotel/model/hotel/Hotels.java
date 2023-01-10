@@ -42,23 +42,29 @@ public class Hotels {
     private Quartos rooms;
     @Column(length = 5)
     private Integer star;
+    private Integer destaque;
+
+    public Hotels(Categoria categoria, String name, String ein, String address, String phone, String hotelDescription, Cidade city, HotelPrecos hotelPrices, Quartos rooms, Integer star, Integer destaque) {
+        this.categoria = categoria;
+        this.name = name;
+        this.ein = ein;
+        Address = address;
+        this.phone = phone;
+        this.hotelDescription = hotelDescription;
+        this.city = city;
+        this.hotelPrices = hotelPrices;
+        this.rooms = rooms;
+        this.star = star;
+        this.destaque = destaque;
+    }
 
 
-    @ManyToOne
-    @JoinColumn(name = "foto_frontal")
-    private HotelFrenteFoto hotelFrenteFoto;
 //
 //    @ManyToOne
 //    @JoinColumn(name = "todas_fotos")
 //    private HotelFotos hotelFotos;
 
-    public HotelFrenteFoto getHotelFrenteFoto() {
-        return hotelFrenteFoto;
-    }
 
-    public void setHotelFrenteFoto(HotelFrenteFoto hotelFrenteFoto) {
-        this.hotelFrenteFoto = hotelFrenteFoto;
-    }
 
 //    public HotelFotos getHotelFotos() {
 //        return hotelFotos;
@@ -68,14 +74,14 @@ public class Hotels {
 //        this.hotelFotos = hotelFotos;
 //    }
 
-    private Integer Destaque;
+
 
     public Integer getDestaque() {
-        return Destaque;
+        return destaque;
     }
 
     public void setDestaque(Integer destaque) {
-        Destaque = destaque;
+        this.destaque = destaque;
     }
 
     public Categoria getCategoria() {

@@ -29,6 +29,15 @@ public class HotelPrecos {
 //    @JoinColumn(name = "price_hotel")
 //    private Hotels hotel;
 
+
+    public HotelPrecos(Float priceOne, Float priceTwo, Float priceThree, Float priceFour, Float priceFive) {
+        this.priceOne = priceOne;
+        this.priceTwo = priceTwo;
+        this.priceThree = priceThree;
+        this.priceFour = priceFour;
+        this.priceFive = priceFive;
+    }
+
     public Float getPriceOne() {
         return priceOne;
     }

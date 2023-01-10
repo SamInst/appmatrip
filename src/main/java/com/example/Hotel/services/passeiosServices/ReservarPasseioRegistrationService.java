@@ -11,10 +11,11 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class ReservarPasseioRegistrationService {
-    @Autowired
-    private  ReservarPasseioRepository reservarPasseioRepository;
+    private  final ReservarPasseioRepository reservarPasseioRepository;
 
-
+    public ReservarPasseioRegistrationService(ReservarPasseioRepository reservarPasseioRepository) {
+        this.reservarPasseioRepository = reservarPasseioRepository;
+    }
 
     public ReservarPasseio add(ReservarPasseio reservarPasseio) {return reservarPasseioRepository.add(reservarPasseio);}
     public void exclude(Long passeiosId) {

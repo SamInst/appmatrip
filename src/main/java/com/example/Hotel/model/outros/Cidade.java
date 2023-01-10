@@ -15,6 +15,11 @@ import java.util.Objects;
         @JoinColumn(name = "state_id")
         private Estado state;
 
+    public Cidade(long id, String name, Estado state) {
+        this.id = id;
+        this.name = name;
+        this.state = state;
+    }
 
     public Estado getState() {return state;}
     public void setState(Estado state) {this.state = state;}

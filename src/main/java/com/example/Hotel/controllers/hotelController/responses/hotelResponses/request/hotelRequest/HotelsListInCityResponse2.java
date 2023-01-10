@@ -10,12 +10,11 @@ public record HotelsListInCityResponse2(
         Integer estrelas,
         Integer quantidade_dias,
         Float total
-
-) {
+    ){
     public record City(
         String cidade,
         String estado
-){}
+    ){}
     public record HotelPrices(
             Float preco
     ){}

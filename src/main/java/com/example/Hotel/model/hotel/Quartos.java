@@ -13,6 +13,10 @@ public class Quartos {
 //       rooms.add();
 //   }
 
+    public Quartos(int numberRooms) {
+        this.numberRooms = numberRooms;
+    }
+
     public int getNumberRooms() {
         return numberRooms;
     }
